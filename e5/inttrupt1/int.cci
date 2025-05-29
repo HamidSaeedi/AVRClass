@@ -1,0 +1,13 @@
+VERSION:3 SOURCE_TIMESTAMP:5AB69E3C
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\alcd.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\stdio.h"
+NODE:I LEVEL:0 LINE:11 "C:\cvavr\inc\stdint.h"
+NODE:I LEVEL:0 LINE:12 "C:\cvavr\inc\delay.h"
+NODE:M LEVEL:0 LINE:13 "LED_ON"
+NODE:M LEVEL:0 LINE:14 "LED_OFF"
+NODE:M LEVEL:0 LINE:15 "BUTTON_PUSHED"
+NODE:V LEVEL:0 LINE:17 "lcd_buffer -> RAM:????"
+NODE:V LEVEL:0 LINE:18 "counter -> R5"
+NODE:F LEVEL:0 LINE:20 "EXI2(void)"
+NODE:F LEVEL:0 LINE:27 "main(void)"

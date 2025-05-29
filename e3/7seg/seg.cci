@@ -1,0 +1,10 @@
+VERSION:3 SOURCE_TIMESTAMP:5AAF8C3B
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\stdint.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\delay.h"
+NODE:V LEVEL:0 LINE:11 "_7segDataCC -> RAM:????"
+NODE:V LEVEL:0 LINE:12 "i -> R5"
+NODE:V LEVEL:0 LINE:13 "j -> R6,R7"
+NODE:V LEVEL:0 LINE:14 "MyNumber -> R8,R9"
+NODE:F LEVEL:0 LINE:15 "main(void)"
+NODE:F LEVEL:0 LINE:36 "Extract(uint16_t num)"

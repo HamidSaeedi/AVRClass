@@ -1,0 +1,11 @@
+VERSION:3 SOURCE_TIMESTAMP:5AB685AF
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\alcd.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\delay.h"
+NODE:I LEVEL:0 LINE:11 "C:\cvavr\inc\stdio.h"
+NODE:I LEVEL:0 LINE:12 "C:\cvavr\inc\stdint.h"
+NODE:V LEVEL:0 LINE:13 "s -> R5"
+NODE:V LEVEL:0 LINE:14 "m -> R4"
+NODE:V LEVEL:0 LINE:15 "h -> R7"
+NODE:V LEVEL:0 LINE:16 "lcd_buffer -> RAM:????"
+NODE:F LEVEL:0 LINE:17 "main(void)"

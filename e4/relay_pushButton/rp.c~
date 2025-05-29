@@ -1,0 +1,21 @@
+/*
+ * rp.c
+ *
+ * Created: 5/15/2025 6:49:59 PM
+ * Author: Asus
+ */
+
+#include <io.h>
+#include <delay.h>
+void main(void)
+{
+DDRA=0x01;
+DDRD=0x00;
+PORTD=255;
+while (1)
+    {
+    // Please write your application code here
+      while(PIND==0x00)
+        PORTA=0x01;
+    }
+}

@@ -1,0 +1,51 @@
+/*
+ * seg.c
+ *
+ * Created: 5/8/2025 7:08:47 PM
+ * Author: Asus
+ */
+
+#include <io.h>
+#include <stdint.h>
+#include <delay.h>
+uint8_t _7segDataCC[10]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+uint8_t i=0;
+uint16_t j=0;
+uint16_t MyNumber=137909;
+void main(void)
+{
+ DDRA=0xff;  
+ DDRB=0xff;
+while (1)
+    {
+    // Please write your application code here
+    for(j=1;j<256;j=j*2)
+    { 
+        for(i=0;i<=9;i++)
+        {
+            PORTA=_7segDataCC[i];
+            delay_ms(500);
+        }  
+        PORTB=~(j);
+    }                          
+    
+    }
+}
+
+
+void Extract(uint16_t num)
+{
+    uint16_t temp=0;  
+    uint16_t count=1;
+    temp=num;
+    
+    while(temp!=0)
+    {                
+        PORTA=_7segDataCC[temp%10];
+        temp=temp/10;
+        PORTB=count;   
+        count=count*2;  
+        delay_ms(300);
+        
+    }
+}
