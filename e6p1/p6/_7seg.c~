@@ -1,0 +1,36 @@
+
+
+#include <io.h>
+#include <stdint.h>
+#include <delay.h>
+uint8_t _7segDataCC[10]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+uint32_t number=467;  // -> 1/10 -> %=1 /=0 
+void _7segDisplay(uint32_t num);
+void main(void)
+{
+DDRD=255;
+DDRB=0x3f;
+PORTD=_7segDataCC[3];
+while (1)
+    {
+      _7segDisplay(number);
+      number++; 
+    }
+}
+
+
+
+
+void _7segDisplay(uint32_t num)
+{
+    uint32_t temp=0,i=32;
+    temp=num;
+    while(temp!=0)
+    { 
+        PORTB=~i;
+        PORTD=_7segDataCC[temp%10];
+        temp=temp/10; 
+        delay_ms(5); 
+        i=i/2;
+    }    
+}
