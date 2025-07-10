@@ -1087,11 +1087,9 @@ __DELAY_USW_LOOP:
 ;NAME DEFINITIONS FOR GLOBAL VARIABLES ALLOCATED TO REGISTERS
 	.DEF _ADC_buffer=R4
 	.DEF _ADC_buffer_msb=R5
-	.DEF _Temprature=R6
-	.DEF _Temprature_msb=R7
-	.DEF __lcd_x=R9
-	.DEF __lcd_y=R8
-	.DEF __lcd_maxx=R11
+	.DEF __lcd_x=R7
+	.DEF __lcd_y=R6
+	.DEF __lcd_maxx=R9
 
 	.CSEG
 	.ORG 0x00
@@ -1122,12 +1120,9 @@ __START_OF_CODE:
 	JMP  0x00
 	JMP  0x00
 
-;GLOBAL REGISTER VARIABLES INITIALIZATION
-__REG_VARS:
-	.DB  0x0,0x0
-
 _0x0:
-	.DB  0x74,0x65,0x6D,0x70,0x3D,0x25,0x64,0x0
+	.DB  0x74,0x65,0x6D,0x70,0x3D,0x25,0x30,0x32
+	.DB  0x2E,0x32,0x66,0x0
 _0x2000000:
 	.DB  0x2D,0x4E,0x41,0x4E,0x0
 _0x2020003:
@@ -1139,10 +1134,6 @@ _0x20A0000:
 	.DB  0x0
 
 __GLOBAL_INI_TBL:
-	.DW  0x02
-	.DW  0x06
-	.DW  __REG_VARS*2
-
 	.DW  0x02
 	.DW  __base_y_G101
 	.DW  _0x2020003*2
@@ -1256,7 +1247,7 @@ __GLOBAL_INI_END:
 ;uint8_t lcd_buffer[32];
 ;uint16_t ADC_buffer;
 ;float Votage=0;
-;int16_t Temprature=0;
+;float Temprature=0;
 ;void main(void)
 ; 0000 0014 {
 
@@ -1278,48 +1269,26 @@ _0x3:
 ; 0000 0019     {
 ; 0000 001A     // Please write your application code here
 ; 0000 001B 
-; 0000 001C     ADCSRA|=(1<<6);
-	SBI  0x6,6
+; 0000 001C     //ADCSRA|=(1<<6);
 ; 0000 001D     delay_ms(1000);
 	LDI  R26,LOW(1000)
 	LDI  R27,HIGH(1000)
 	CALL _delay_ms
-; 0000 001E     ADC_buffer=ADCL+(ADCH<<8);
-	IN   R30,0x4
-	LDI  R31,0
-	MOVW R26,R30
-	IN   R30,0x5
-	MOV  R31,R30
-	LDI  R30,0
-	ADD  R30,R26
-	ADC  R31,R27
-	MOVW R4,R30
-; 0000 001F     Votage=(float)(((float)ADC_buffer*REFVOLTAGE)/ADC_RES);
-	CLR  R22
-	CLR  R23
-	CALL __CDF1
-	__GETD2N 0x40A00000
-	CALL __MULF12
-	MOVW R26,R30
-	MOVW R24,R22
-	__GETD1N 0x447FC000
-	CALL __DIVF21
-	STS  _Votage,R30
-	STS  _Votage+1,R31
-	STS  _Votage+2,R22
-	STS  _Votage+3,R23
-; 0000 0020     Temprature=(int16_t)(Votage*100);
-	LDS  R26,_Votage
-	LDS  R27,_Votage+1
-	LDS  R24,_Votage+2
-	LDS  R25,_Votage+3
-	__GETD1N 0x42C80000
-	CALL __MULF12
-	CALL __CFD1
-	MOVW R6,R30
-; 0000 0021     lcd_clear();
-	CALL _lcd_clear
-; 0000 0022     sprintf(lcd_buffer,"temp=%d",Temprature);
+; 0000 001E    // ADC_buffer=ADCL+(ADCH<<8);
+; 0000 001F    // Votage=(float)(((float)ADC_buffer*REFVOLTAGE)/ADC_RES);
+; 0000 0020    // Temprature=(int16_t)(Votage*100);
+; 0000 0021     Temprature=2.22;
+	__GETD1N 0x400E147B
+	STS  _Temprature,R30
+	STS  _Temprature+1,R31
+	STS  _Temprature+2,R22
+	STS  _Temprature+3,R23
+; 0000 0022     lcd_gotoxy(0,0);
+	LDI  R30,LOW(0)
+	ST   -Y,R30
+	LDI  R26,LOW(0)
+	CALL _lcd_gotoxy
+; 0000 0023     sprintf(lcd_buffer,"temp=%02.2f",Temprature);
 	LDI  R30,LOW(_lcd_buffer)
 	LDI  R31,HIGH(_lcd_buffer)
 	ST   -Y,R31
@@ -1327,21 +1296,23 @@ _0x3:
 	__POINTW1FN _0x0,0
 	ST   -Y,R31
 	ST   -Y,R30
-	MOVW R30,R6
-	CALL __CWD1
+	LDS  R30,_Temprature
+	LDS  R31,_Temprature+1
+	LDS  R22,_Temprature+2
+	LDS  R23,_Temprature+3
 	CALL __PUTPARD1
 	LDI  R24,4
 	CALL _sprintf
 	ADIW R28,8
-; 0000 0023     lcd_puts(lcd_buffer);
+; 0000 0024     lcd_puts(lcd_buffer);
 	LDI  R26,LOW(_lcd_buffer)
 	LDI  R27,HIGH(_lcd_buffer)
 	CALL _lcd_puts
-; 0000 0024 
 ; 0000 0025 
-; 0000 0026     }
+; 0000 0026 
+; 0000 0027     }
 	RJMP _0x3
-; 0000 0027 }
+; 0000 0028 }
 _0x6:
 	RJMP _0x6
 ; .FEND
@@ -2243,8 +2214,8 @@ _lcd_gotoxy:
 	LDD  R26,Y+1
 	ADD  R26,R30
 	RCALL __lcd_write_data
-	LDD  R9,Y+1
-	LDD  R8,Y+0
+	LDD  R7,Y+1
+	LDD  R6,Y+0
 	ADIW R28,2
 	RET
 ; .FEND
@@ -2257,8 +2228,8 @@ _lcd_clear:
 	LDI  R26,LOW(1)
 	CALL SUBOPT_0x1C
 	LDI  R30,LOW(0)
-	MOV  R8,R30
-	MOV  R9,R30
+	MOV  R6,R30
+	MOV  R7,R30
 	RET
 ; .FEND
 _lcd_putchar:
@@ -2267,13 +2238,13 @@ _lcd_putchar:
 	LD   R26,Y
 	CPI  R26,LOW(0xA)
 	BREQ _0x2020005
-	CP   R9,R11
+	CP   R7,R9
 	BRLO _0x2020004
 _0x2020005:
 	LDI  R30,LOW(0)
 	ST   -Y,R30
-	INC  R8
-	MOV  R26,R8
+	INC  R6
+	MOV  R26,R6
 	RCALL _lcd_gotoxy
 	LD   R26,Y
 	CPI  R26,LOW(0xA)
@@ -2281,7 +2252,7 @@ _0x2020005:
 	RJMP _0x20C0004
 _0x2020007:
 _0x2020004:
-	INC  R9
+	INC  R7
 	SBI  0x18,0
 	LD   R26,Y
 	RCALL __lcd_write_data
@@ -2322,7 +2293,7 @@ _lcd_init:
 	CBI  0x18,2
 	CBI  0x18,0
 	CBI  0x18,1
-	LDD  R11,Y+0
+	LDD  R9,Y+0
 	LD   R30,Y
 	SUBI R30,-LOW(128)
 	__PUTB1MN __base_y_G101,2
@@ -2647,7 +2618,7 @@ _0x20C0002:
 	.DSEG
 _lcd_buffer:
 	.BYTE 0x20
-_Votage:
+_Temprature:
 	.BYTE 0x4
 __base_y_G101:
 	.BYTE 0x4

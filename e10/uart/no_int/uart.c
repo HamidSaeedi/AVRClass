@@ -1,0 +1,56 @@
+/*
+ * uart.c
+ *
+ * Created: 7/10/2025 5:27:17 PM
+ * Author: Asus
+ */
+
+#include <io.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <delay.h>
+#include <alcd.h>
+
+
+uint8_t uart_buffer_TX[20];
+uint8_t counter=0;
+uint8_t i=0;
+void main(void)
+{
+UCSRB=(0<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (1<<RXEN) | (1<<TXEN) | (0<<UCSZ2) | (0<<RXB8) | (0<<TXB8);
+UCSRC=(1<<URSEL) | (0<<UMSEL) | (0<<UPM1) | (0<<UPM0) | (0<<USBS) | (1<<UCSZ1) | (1<<UCSZ0) | (0<<UCPOL);
+UBRRH=0x00;
+UBRRL=0x33;
+lcd_init(16);
+while (1)
+    {
+    // Please write your application code here 
+    /* This part will trasmit 
+    count++;
+    if(count>254)
+       count=0;
+    sprintf(uart_buffer_TX," hello num=%03d\n ",count);
+    for(i=0;i<sizeof(uart_buffer_TX);i++)
+    {
+            while ( !( UCSRA & (1<<UDRE)) )
+            {
+            }
+             UDR=uart_buffer_TX[i];
+    }
+    delay_ms(1000);   
+    */ 
+    
+    while ( !(UCSRA & (1<<RXC)) )
+    {
+    }
+      lcd_putchar(UDR);
+      counter++;
+      if(counter>31)
+      {
+        counter=0;
+        lcd_clear();
+      }
+    }
+}
+
+

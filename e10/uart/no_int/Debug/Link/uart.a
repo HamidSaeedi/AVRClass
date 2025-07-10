@@ -1,0 +1,115 @@
+;/*
+; * uart.c
+; *
+; * Created: 7/10/2025 5:27:17 PM
+; * Author: Asus
+; */
+;
+;#include <io.h>
+;PCODE: $00000000 VOL: 0
+	#ifndef __SLEEP_DEFINED__
+;PCODE: $00000001 VOL: 0
+	#define __SLEEP_DEFINED__
+;PCODE: $00000002 VOL: 0
+	.EQU __se_bit=0x40
+;PCODE: $00000003 VOL: 0
+	.EQU __sm_mask=0xB0
+;PCODE: $00000004 VOL: 0
+	.EQU __sm_powerdown=0x20
+;PCODE: $00000005 VOL: 0
+	.EQU __sm_powersave=0x30
+;PCODE: $00000006 VOL: 0
+	.EQU __sm_standby=0xA0
+;PCODE: $00000007 VOL: 0
+	.EQU __sm_ext_standby=0xB0
+;PCODE: $00000008 VOL: 0
+	.EQU __sm_adc_noise_red=0x10
+;PCODE: $00000009 VOL: 0
+	.SET power_ctrl_reg=mcucr
+;PCODE: $0000000A VOL: 0
+	#endif
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;#include <stdio.h>
+;#include <stdint.h>
+;#include <delay.h>
+;#include <alcd.h>
+;
+;
+;uint8_t uart_buffer_TX[20];
+;uint8_t counter=0;
+;uint8_t i=0;
+;void main(void)
+; 0000 0013 {
+
+	.CSEG
+;PCODE: $0000000D VOL: 0
+; 0000 0014 UCSRB=(0<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (1<<RXEN) | (1<<TXEN) | (0<<UCSZ2) | (0<<RXB8) | (0<<TXB8);
+;PCODE: $0000000E VOL: 0
+;PCODE: $0000000F VOL: 0
+; 0000 0015 UCSRC=(1<<URSEL) | (0<<UMSEL) | (0<<UPM1) | (0<<UPM0) | (0<<USBS) | (1<<UCSZ1) | (1<<UCSZ0) | (0<<UCPOL);
+;PCODE: $00000010 VOL: 0
+;PCODE: $00000011 VOL: 0
+; 0000 0016 UBRRH=0x00;
+;PCODE: $00000012 VOL: 0
+;PCODE: $00000013 VOL: 0
+; 0000 0017 UBRRL=0x33;
+;PCODE: $00000014 VOL: 0
+;PCODE: $00000015 VOL: 0
+; 0000 0018 lcd_init(16);
+;PCODE: $00000016 VOL: 0
+;PCODE: $00000017 VOL: 0
+; 0000 0019 while (1)
+;PCODE: $00000018 VOL: 0
+; 0000 001A     {
+; 0000 001B     // Please write your application code here
+; 0000 001C     /* This part will trasmit
+; 0000 001D     count++;
+; 0000 001E     if(count>254)
+; 0000 001F        count=0;
+; 0000 0020     sprintf(uart_buffer_TX," hello num=%03d\n ",count);
+; 0000 0021     for(i=0;i<sizeof(uart_buffer_TX);i++)
+; 0000 0022     {
+; 0000 0023             while ( !( UCSRA & (1<<UDRE)) )
+; 0000 0024             {
+; 0000 0025             }
+; 0000 0026              UDR=uart_buffer_TX[i];
+; 0000 0027     }
+; 0000 0028     delay_ms(1000);
+; 0000 0029     */
+; 0000 002A 
+; 0000 002B     while ( !(UCSRA & (1<<RXC)) )
+;PCODE: $00000019 VOL: 0
+;PCODE: $0000001A VOL: 0
+;PCODE: $0000001B VOL: 0
+;PCODE: $0000001C VOL: 0
+; 0000 002C     {
+; 0000 002D     }
+;PCODE: $0000001D VOL: 0
+;PCODE: $0000001E VOL: 0
+; 0000 002E       lcd_putchar(UDR);
+;PCODE: $0000001F VOL: 0
+;PCODE: $00000020 VOL: 0
+;PCODE: $00000021 VOL: 0
+; 0000 002F       counter++;
+;PCODE: $00000022 VOL: 0
+; 0000 0030       if(counter>31)
+;PCODE: $00000023 VOL: 0
+;PCODE: $00000024 VOL: 0
+;PCODE: $00000025 VOL: 0
+; 0000 0031       {
+; 0000 0032         counter=0;
+;PCODE: $00000026 VOL: 0
+; 0000 0033         lcd_clear();
+;PCODE: $00000027 VOL: 0
+; 0000 0034       }
+; 0000 0035     }
+;PCODE: $00000028 VOL: 0
+;PCODE: $00000029 VOL: 0
+;PCODE: $0000002A VOL: 0
+; 0000 0036 }
+;PCODE: $0000002B VOL: 0
+;PCODE: $0000002C VOL: 0
+;PCODE: $0000002D VOL: 0
+;
+;
