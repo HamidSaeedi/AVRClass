@@ -1,0 +1,32 @@
+/*
+ * adc.c
+ *
+ * Created: 6/26/2025 6:55:20 PM
+ * Author: Asus
+ */
+
+#include <io.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <alcd.h>
+#include <delay.h>
+uint8_t lcd_buffer[32];
+uint16_t ADC_buffer;
+void main(void)
+{
+ADCSRA|=(1<<7)|(1<<2)|(1<<1)|(1<<0);
+lcd_init(16);
+while (1)
+    {
+    // Please write your application code here
+    
+    ADCSRA|=(1<<6);
+    delay_ms(500);
+    ADC_buffer=ADCL+(ADCH<<8);
+    lcd_clear();
+    sprintf(lcd_buffer,"ADC=%d",ADC_buffer);
+    lcd_puts(lcd_buffer); 
+    
+    
+    }
+}

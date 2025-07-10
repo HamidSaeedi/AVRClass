@@ -1,0 +1,13 @@
+VERSION:3 SOURCE_TIMESTAMP:5AE395CA
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\stdio.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\stdint.h"
+NODE:I LEVEL:0 LINE:11 "C:\cvavr\inc\alcd.h"
+NODE:I LEVEL:0 LINE:12 "C:\cvavr\inc\delay.h"
+NODE:M LEVEL:0 LINE:13 "REFVOLTAGE"
+NODE:M LEVEL:0 LINE:14 "ADC_RES"
+NODE:V LEVEL:0 LINE:15 "lcd_buffer -> RAM:????"
+NODE:V LEVEL:0 LINE:16 "ADC_buffer -> R4,R5"
+NODE:V LEVEL:0 LINE:17 "Votage -> RAM:????"
+NODE:V LEVEL:0 LINE:18 "Temprature -> R6,R7"
+NODE:F LEVEL:0 LINE:19 "main(void)"

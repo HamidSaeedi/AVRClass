@@ -1,0 +1,39 @@
+/*
+ * adc.c
+ *
+ * Created: 6/26/2025 6:55:20 PM
+ * Author: Asus
+ */
+
+#include <io.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <alcd.h>
+#include <delay.h>
+#define  REFVOLTAGE 5
+#define  ADC_RES 1023
+uint8_t lcd_buffer[32];
+uint16_t ADC_buffer;
+float Votage=0;
+int16_t Temprature=0;
+void main(void)
+{
+ADCSRA|=(1<<7)|(1<<2)|(1<<1)|(1<<0);
+ADMUX|=(0<<7)|(0<<6);
+lcd_init(16);
+while (1)
+    {
+    // Please write your application code here
+    
+    ADCSRA|=(1<<6);
+    delay_ms(1000);
+    ADC_buffer=ADCL+(ADCH<<8);
+    Votage=(float)(((float)ADC_buffer*REFVOLTAGE)/ADC_RES);
+    Temprature=(int16_t)(Votage*100);
+    lcd_clear();
+    sprintf(lcd_buffer,"temp=%f",Temprature);
+    lcd_puts(lcd_buffer); 
+    
+    
+    }
+}
