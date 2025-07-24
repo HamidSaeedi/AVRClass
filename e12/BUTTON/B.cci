@@ -1,0 +1,12 @@
+VERSION:3 SOURCE_TIMESTAMP:5AF894CF
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\alcd.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\stdio.h"
+NODE:I LEVEL:0 LINE:11 "C:\cvavr\inc\stdint.h"
+NODE:I LEVEL:0 LINE:12 "C:\cvavr\inc\delay.h"
+NODE:V LEVEL:0 LINE:14 "BPUSH -> R5"
+NODE:V LEVEL:0 LINE:15 "LCD_ON -> R4"
+NODE:V LEVEL:0 LINE:16 "TIM0_Count -> R7"
+NODE:F LEVEL:0 LINE:20 "BUTTON1(void)"
+NODE:F LEVEL:0 LINE:25 "TIM1(void)"
+NODE:F LEVEL:0 LINE:51 "main(void)"

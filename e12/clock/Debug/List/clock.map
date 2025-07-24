@@ -1,0 +1,26 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+_7segDataCC                                                                       0x0160      10
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+shifter                                                                           R4,R5        2
+data                                                                              R7           1
+h                                                                                 R6           1
+m                                                                                 R9           1
+s                                                                                 R8           1
+TIM0_counter                                                                      R10,R11      2
+blink                                                                             R13          1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+TIM1                                                                              0x00071     72
+main                                                                              0x000B9     15
+Extract                                                                           0x000C8    117

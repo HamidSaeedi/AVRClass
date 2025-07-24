@@ -1,0 +1,33 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+uart_buffer_RX                                                                    0x0160       8
+CommandOn                                                                         0x0168       7
+CommandOff                                                                        0x016F       7
+_base_y                                                                           0x0176       4
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+counter                                                                           R5           1
+RX_count                                                                          R4           1
+j                                                                                 R7           1
+_lcd_x                                                                            R6           1
+_lcd_y                                                                            R9           1
+_lcd_maxx                                                                         R8           1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+USART_RX_ISR                                                                      0x00076     66
+main                                                                              0x000B8     28
+ON_F                                                                              0x000D4     20
+OFF_F                                                                             0x000E8     22
+_lcd_write_nibble_G101                                                            0x000FE     20
+_lcd_write_data                                                                   0x00112     12
+lcd_clear                                                                         0x0011E     12
+lcd_init                                                                          0x0012A     46

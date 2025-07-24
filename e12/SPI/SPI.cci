@@ -1,0 +1,6 @@
+VERSION:3 SOURCE_TIMESTAMP:5AF88D9D
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\stdint.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\delay.h"
+NODE:V LEVEL:0 LINE:11 "SPI_BUF -> R5"
+NODE:F LEVEL:0 LINE:13 "main(void)"

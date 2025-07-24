@@ -1,0 +1,33 @@
+/*
+ * SPI.c
+ *
+ * Created: 7/24/2025 4:42:44 PM
+ * Author: Asus
+ */
+
+#include <io.h>
+#include <stdint.h>
+#include <delay.h>
+uint8_t SPI_BUF;
+
+void main(void)
+{
+//SPSR |=(1<<0);
+SPCR |=(1<<0)| (1<<1) | (0<<2) | (0<<3) | (1<<4) | (0<<5) | (1<<6) | (0<<7);
+DDRB |=(1<<6) | (1<<7);
+while (1)
+    {
+    // Please write your application code here 
+    
+    SPDR=0x56;
+    delay_ms(1000);
+    SPI_BUF=SPDR;
+    delay_ms(1000);
+    SPI_BUF=SPSR;
+    /* Start transmission */
+    //SPDR = 0x56;
+/* Wait for transmission complete */
+    //while(!(SPSR & (1<<SPIF)));
+
+    }
+}
