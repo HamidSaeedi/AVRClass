@@ -1,0 +1,13 @@
+VERSION:3 SOURCE_TIMESTAMP:5AF89CA2
+NODE:I LEVEL:0 LINE:8 "C:\cvavr\inc\io.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavr\inc\delay.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavr\inc\stdint.h"
+NODE:M LEVEL:0 LINE:12 "data"
+NODE:M LEVEL:0 LINE:13 "SH_CP"
+NODE:M LEVEL:0 LINE:14 "OE"
+NODE:V LEVEL:0 LINE:18 "counter -> R5"
+NODE:V LEVEL:0 LINE:19 "counter1 -> R4"
+NODE:V LEVEL:0 LINE:20 "_7segDataCC -> RAM:????"
+NODE:F LEVEL:0 LINE:22 "main(void)"
+NODE:F LEVEL:0 LINE:43 "serializer(uint8_t number)"
+NODE:F LEVEL:0 LINE:62 "ClearDisp(void)"
